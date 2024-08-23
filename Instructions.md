@@ -7,10 +7,15 @@
 ```python
 # команды создания виртуального окружения
 # и установки необходимых библиотек в него
-
+sudo apt-get install python3.10-venv
+python3.10 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install uvicorn["standard"]
 
 # команда перехода в директорию
-
+cd services
+cd ml_service
 
 # команда запуска сервиса с помощью uvicorn
 ```
