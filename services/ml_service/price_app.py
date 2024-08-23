@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from ml_service.model_handler import FastApiHandler
+from model_handler import FastApiHandler
 import pandas as pd
 import json 
 app = FastAPI()

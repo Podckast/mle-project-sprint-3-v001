@@ -17,8 +17,26 @@ pip install uvicorn["standard"]
 cd services
 cd ml_service
 
+#Так как модель весит слишком много и запушить её в гитхаб нельзя, модель придётся импортировать из хранилища 
+
+#Команды установки модели на локальную машину (перед этим надо выйти из директорий ml_service и services)
+
+pip install mlflow
+pip install psycorg2-binary
+pip install boto3
+cd services
+sh server.sh
+python3 model_import.py
+
+
+
+
+
+
+
 # команда запуска сервиса с помощью uvicorn
 ```
+uvicorn price_app:app  --reload --port 8000 --host 127.0.0.1
 
 ### Пример curl-запроса к микросервису
 
@@ -34,7 +52,13 @@ curl -X 'POST' \
 # команда перехода в нужную директорию
 
 # команда для запуска микросервиса в режиме docker compose
+
+#вероятно, здесь имелось в виду в режиме БЕЗ docker compose (так как в задании написано именно так)
+#нужно находится в директории services
+
 ```
+docker image build . --tag ml_service:1
+
 
 ### Пример curl-запроса к микросервису
 
