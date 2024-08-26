@@ -2,6 +2,8 @@ import fastapi
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 import joblib 
+import sys 
+
 class FastApiHandler():
 
     def __init__(self) -> None:
@@ -11,7 +13,7 @@ class FastApiHandler():
             "model_params": dict
         }
         self.req_model_params = ['build_year', 'building_type_int', 'latitude', 'longitude', 'ceiling_height', 'flats_count', 'floors_total', 'has_elevator', 'floor', 'kitchen_area', 'living_area', 'rooms', 'is_apartment', 'total_area']
-        self.model_path = '/services/models/model.pkl'
+        self.model_path = '/home/mle-user/mle_projects/mle-project-sprint-3-v001/services/models/model.pkl'
         self.load_model(model_path = self.model_path)
         
     def load_model(self,model_path:str):

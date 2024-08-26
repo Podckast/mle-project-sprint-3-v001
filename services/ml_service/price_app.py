@@ -1,28 +1,18 @@
 from fastapi import FastAPI
-from model_handler import FastApiHandler
 import pandas as pd
 import json 
+import pandas as pd
+import joblib 
+import sys
+sys.path.append('/home/mle-user/mle_projects/mle-project-sprint-3-v001/services')
+
+from ml_service.model_handler import FastApiHandler
+
+ 
+
+
 app = FastAPI()
 
-
-all_params = {
-
-        'build_year': 2001,
-        'building_type_int': 2, 
-        'latitude': 55.695980, 
-        'longitude': 37.811546,
-        'ceiling_height': 2.60, 
-        'flats_count': 153, 
-        'floors_total': 24, 
-        'has_elevator': True, 
-        'floor': 17,
-        'kitchen_area': 10.0, 
-        'living_area': 35.000000,
-        'rooms': 2,
-        'is_apartment': False, 
-        'total_area': 58.000000
-        
-}
 
 app.handler = FastApiHandler()
 @app.post("/api/prices")
@@ -32,4 +22,3 @@ def get_prediction(user_id: str, model_params: dict):
     prediction = app.handler.handle(all_params)
     print(type(prediction))
     return prediction
-

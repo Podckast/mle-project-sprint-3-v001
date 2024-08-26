@@ -42,7 +42,25 @@ uvicorn price_app:app  --reload --port 8000 --host 127.0.0.1
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:...' \
+  'http://127.0.0.1:8000/api/prices?user_id=123' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "build_year": 2001,
+    "building_type_int": 2, 
+    "latitude": 55.695980, 
+    "longitude": 37.811546,
+    "ceiling_height": 2.60, 
+    "flats_count": 153, 
+    "floors_total": 24, 
+    "has_elevator": true, 
+    "floor": 17,
+    "kitchen_area": 10.0, 
+    "living_area": 35.000000,
+    "rooms": 2,
+    "is_apartment": false, 
+    "total_area": 58.000000
+}'
 ```
 
 
@@ -58,13 +76,31 @@ curl -X 'POST' \
 
 ```
 docker image build . --tag ml_service:1
-
+docker container run --publish 8000:1702 --env-file .env --volume=./volume:/services/models ml_service:1
 
 ### Пример curl-запроса к микросервису
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:...' \
+  'http://127.0.0.1:8000/api/prices?user_id=123' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "build_year": 2001,
+    "building_type_int": 2, 
+    "latitude": 55.695980, 
+    "longitude": 37.811546,
+    "ceiling_height": 2.60, 
+    "flats_count": 153, 
+    "floors_total": 24, 
+    "has_elevator": true, 
+    "floor": 17,
+    "kitchen_area": 10.0, 
+    "living_area": 35.000000,
+    "rooms": 2,
+    "is_apartment": false, 
+    "total_area": 58.000000
+}'
 ```
 
 ## 3. Docker compose для микросервиса и системы моониторинга
