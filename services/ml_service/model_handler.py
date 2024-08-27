@@ -41,8 +41,7 @@ class FastApiHandler():
         return True
     
     def check_model_params(self, model_params):
-        print(set(model_params.keys()))
-        print(set(self.req_model_params))
+        
         if set(model_params.keys()) == set(self.req_model_params):
             
             return True
@@ -73,6 +72,7 @@ class FastApiHandler():
                 model_params = params["model_params"]
                 pd_model_params = pd.DataFrame(model_params,index=[0])
                 predicted_price = float(self.predict(pd_model_params))
+                print(predicted_price)
                 response = {"user_id":user_id,"prediction":predicted_price}
         except Exception as e:
             print(f"Failed to handle: {e}")

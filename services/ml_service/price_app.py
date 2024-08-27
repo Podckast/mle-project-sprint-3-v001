@@ -27,7 +27,7 @@ ml_app_predictions = Histogram(
     #описание метрики
     "Histogram of predictions",
     #указаываем корзины для гистограммы
-    buckets=(1, 2, 4, 5, 10)
+    buckets=(1000000, 5000000, 13000000, 20000000, 100000000, 1000000000)
 )
 
 ml_app_counter_pos = Counter("ml_app_counter_pos", "Count of positive predictions")
@@ -43,5 +43,5 @@ def get_prediction(user_id: str, model_params: dict):
     ml_app_predictions.observe(prediction['prediction'])
     if prediction['prediction'] > 0:
         ml_app_counter_pos.inc()
-
+    
     return prediction
