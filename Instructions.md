@@ -12,6 +12,8 @@ python3.10 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 pip install uvicorn["standard"]
+pip install --upgrade fastapi
+pip install --upgrade starlette
 
 # команда перехода в директорию
 cd services
@@ -107,16 +109,43 @@ curl -X 'POST' \
 
 ```bash
 # команда перехода в нужную директорию
+# Необходимо находится в директории /mle_projects/mle-project-sprint-3-v001 
 
+pip install prometheus_fastapi_instrumentator 
 # команда для запуска микросервиса в режиме docker compose
 
+cd services
+docker compose up --build
+
+#Если портов 3000 и 9090 нет, их необходимо указать вручную в ports
+
 ```
+
+
 
 ### Пример curl-запроса к микросервису
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:
+  'http://127.0.0.1:8000/api/prices?user_id=123' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "build_year": 2001,
+    "building_type_int": 2, 
+    "latitude": 55.695980, 
+    "longitude": 37.811546,
+    "ceiling_height": 2.60, 
+    "flats_count": 153, 
+    "floors_total": 24, 
+    "has_elevator": true, 
+    "floor": 17,
+    "kitchen_area": 10.0, 
+    "living_area": 35.000000,
+    "rooms": 2,
+    "is_apartment": false, 
+    "total_area": 58.000000
+}'
 ```
 
 ## 4. Скрипт симуляции нагрузки
@@ -128,6 +157,7 @@ curl -X 'POST' \
 ```
 
 Адреса сервисов:
-- микросервис: http://localhost:<port>
-- Prometheus: ...
-- Grafana: ...
+- микросервис (для первых двух частей проекта): http://127.0.0.1:8000
+- микросервис (для 3 части проекта): http://localhost:1702
+- Prometheus: http://localhost:9090
+- Grafana: http://localhost:3000

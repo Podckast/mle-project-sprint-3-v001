@@ -4,6 +4,8 @@ import json
 import pandas as pd
 import joblib 
 import sys
+from prometheus_fastapi_instrumentator import Instrumentator
+
 sys.path.append('/home/mle-user/mle_projects/mle-project-sprint-3-v001/services')
 
 from ml_service.model_handler import FastApiHandler
@@ -12,6 +14,9 @@ from ml_service.model_handler import FastApiHandler
 
 
 app = FastAPI()
+
+instrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
 
 
 app.handler = FastApiHandler()
